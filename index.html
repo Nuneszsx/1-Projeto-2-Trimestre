@@ -44,5 +44,32 @@
             </div>
 
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500"
-                    
+                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500" alt="Tênis Classic Green">
+                <h3>Tênis Classic Green</h3>
+                <p class="price">R$ 349,90</p>
+                <button onclick="adicionarAoCarrinho('Tênis Classic Green', 349.90)">Adicionar ao Carrinho</button>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="carrinho-lateral" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Seu Carrinho</h3>
+            <button onclick="toggleCarrinho()" class="close-btn">&times;</button>
+        </div>
+        <div id="itens-carrinho" class="cart-items">
+            <p class="cart-empty">Seu carrinho está vazio.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="valor-total">R$ 0,00</span>
+            </div>
+            <button onclick="finalizarCompra()" class="checkout-btn">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
