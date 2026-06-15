@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SneakerX | Loja de Tênis</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">Sneaker<span>X</span></div>
+        <nav>
+            <a href="#">Início</a>
+            <a href="#">Modelos</a>
+            <a href="#contato">Contato</a>
+        </nav>
+        <div class="cart-icon" onclick="toggleCarrinho()">
+            🛒 <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <section class="banner">
+        <h2>Os melhores Sneakers estão aqui</h2>
+        <p>Estilo, conforto e exclusividade a cada passo.</p>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">Lançamentos</h2>
+        <div class="products-grid">
+            
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Tênis Sport Red">
+                <h3>Tênis Sport Red</h3>
+                <p class="price">R$ 299,90</p>
+                <button onclick="adicionarAoCarrinho('Tênis Sport Red', 299.90)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500" alt="Tênis Neon Future">
+                <h3>Tênis Neon Future</h3>
+                <p class="price">R$ 389,90</p>
+                <button onclick="adicionarAoCarrinho('Tênis Neon Future', 389.90)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500" alt="Tênis Classic Green">
+                <h3>Tênis Classic Green</h3>
+                <p class="price">R$ 249,90</p>
+                <button onclick="adicionarAoCarrinho('Tênis Classic Green', 249.90)">Adicionar ao Carrinho</button>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Seu Carrinho</h3>
+            <button class="close-btn" onclick="toggleCarrinho()">&times;</button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <p class="empty-cart">Seu carrinho está vazio.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="total">Total: <span id="cart-total">R$ 0,00</span></div>
+            <button class="checkout-btn" onclick="finalizarCompra()">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
