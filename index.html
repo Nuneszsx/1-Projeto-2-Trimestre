@@ -3,8 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SneakerX | Loja de Tênis</title>
-    <link rel="stylesheet" href="style.css">
+    <title>SneakerX | Loja de Tênis Funcional</title>
+    <style>
+        /* --- ESTILOS BÁSICOS DO SITE --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: #111;
+            color: #fff;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ff3333;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .cart-icon {
+            cursor: pointer;
+            position: relative;
+            font-size: 24px;
+            user-select: none;
+        }
+
+        #cart-count {
+            background-color: #ff3333;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 12px;
+            position: absolute;
+            top: -5px;
+            right: -10px;
+        }
+
+        .banner {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=1200') center/cover;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .product-card h3 {
+            margin: 15px 0 10px 0;
+            font-size: 18px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .product-card button {
+            background-color: #111;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .product-card button:hover {
+            background-color: #ff3333;
+        }
+
+        /* --- ESTILOS DO CARRINHO LATERAL --- */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -350px; /* Escondido para fora da tela */
+            width: 320px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Quando ativo, desliza para a tela */
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #111;
+            color: #fff;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: #777;
+            margin-top: 40px;
+        }
+
+        .cart-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .item-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+        }
+
+        .item-info p {
+            margin: 0;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .remove-item-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            background-color: #fafafa;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
 </head>
 <body>
 
@@ -13,7 +241,6 @@
         <nav>
             <a href="#">Início</a>
             <a href="#">Modelos</a>
-            <a href="#contato">Contato</a>
         </nav>
         <div class="cart-icon" onclick="toggleCarrinho()">
             🛒 <span id="cart-count">0</span>
@@ -59,8 +286,7 @@
             <button onclick="toggleCarrinho()" class="close-btn">&times;</button>
         </div>
         <div id="itens-carrinho" class="cart-items">
-            <p class="cart-empty">Seu carrinho está vazio.</p>
-        </div>
+            </div>
         <div class="cart-footer">
             <div class="cart-total">
                 <span>Total:</span>
@@ -70,6 +296,123 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Array que vai guardar os produtos adicionados
+        let carrinho = [];
+
+        // Função para abrir e fechar o carrinho lateral
+        function toggleCarrinho() {
+            const painelCarrinho = document.getElementById('carrinho-lateral');
+            if (painelCarrinho) {
+                painelCarrinho.classList.toggle('active');
+            }
+        }
+
+        // Função para adicionar o produto ao carrinho
+        function adicionarAoCarrinho(nome, preco) {
+            // Verifica se o item já existe no carrinho
+            const itemExistente = carrinho.find(item => item.nome === nome);
+
+            if (itemExistente) {
+                itemExistente.quantidade += 1;
+            } else {
+                carrinho.push({
+                    nome: nome,
+                    preco: preco,
+                    quantidade: 1
+                });
+            }
+
+            atualizarInterfaceCarrinho();
+            
+            // Abre o carrinho automaticamente ao adicionar um item
+            const painelCarrinho = document.getElementById('carrinho-lateral');
+            if (painelCarrinho && !painelCarrinho.classList.contains('active')) {
+                painelCarrinho.classList.add('active');
+            }
+        }
+
+        // Função para remover uma unidade do item ou tirá-lo do carrinho
+        function removerDoCarrinho(nome) {
+            const index = carrinho.findIndex(item => item.nome === nome);
+
+            if (index !== -1) {
+                if (carrinho[index].quantidade > 1) {
+                    carrinho[index].quantidade -= 1;
+                } else {
+                    carrinho.splice(index, 1);
+                }
+            }
+            atualizarInterfaceCarrinho();
+        }
+
+        // Função que atualiza o contador do ícone, lista os itens e soma o valor total
+        function atualizarInterfaceCarrinho() {
+            const cartCount = document.getElementById('cart-count');
+            const itensCarrinhoContainer = document.getElementById('itens-carrinho');
+            const valorTotalContainer = document.getElementById('valor-total');
+
+            // Segurança: caso os elementos ainda não existam no HTML
+            if (!cartCount || !itensCarrinhoContainer || !valorTotalContainer) return;
+
+            // 1. Atualiza o contador de bolinha vermelha/ícone
+            const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+            cartCount.innerText = totalItens;
+
+            // 2. Limpa a lista visual atual para reconstruir
+            itensCarrinhoContainer.innerHTML = '';
+
+            if (carrinho.length === 0) {
+                itensCarrinhoContainer.innerHTML = '<p class="cart-empty">Seu carrinho está vazio.</p>';
+                valorTotalContainer.innerText = 'R$ 0,00';
+                return;
+            }
+
+            // 3. Renderiza cada item do array no HTML do carrinho
+            let precoTotalGeral = 0;
+
+            carrinho.forEach(item => {
+                const subtotal = item.preco * item.quantidade;
+                precoTotalGeral += subtotal;
+
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('cart-item-row');
+                itemElement.innerHTML = `
+                    <div class="item-info">
+                        <h4>${item.nome}</h4>
+                        <p>R$ ${item.preco.toFixed(2).replace('.', ',')} x ${item.quantidade}</p>
+                    </div>
+                    <button onclick="removerDoCarrinho('${item.nome}')" class="remove-item-btn">🗑️</button>
+                `;
+                itensCarrinhoContainer.appendChild(itemElement);
+            });
+
+            // 4. Atualiza o valor total formatado em Moeda Real (BRL)
+            valorTotalContainer.innerText = `R$ ${precoTotalGeral.toFixed(2).replace('.', ',')}`;
+        }
+
+        // Função para simular o encerramento do pedido
+        function finalizarCompra() {
+            if (carrinho.length === 0) {
+                alert("Seu carrinho está vazio! Adicione algum sneaker antes de finalizar.");
+                return;
+            }
+
+            alert("Pedido processado com sucesso! Obrigado por comprar na SneakerX.");
+            carrinho = []; // Limpa o carrinho
+            atualizarInterfaceCarrinho();
+            toggleCarrinho(); // Fecha a aba do carrinho
+        }
+
+        // --- EXPOSIÇÃO PARA O ESCOPO GLOBAL ---
+        // Garante que o HTML encontre as funções independentemente de como o script carregar
+        window.toggleCarrinho = toggleCarrinho;
+        window.adicionarAoCarrinho = adicionarAoCarrinho;
+        window.removerDoCarrinho = removerDoCarrinho;
+        window.finalizarCompra = finalizarCompra;
+
+        // Inicializa o estado visual do carrinho vazio ao carregar o site
+        document.addEventListener('DOMContentLoaded', atualizarInterfaceCarrinho);
+    </script>
 </body>
 </html>

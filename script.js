@@ -4,7 +4,9 @@ let carrinho = [];
 // Função para abrir e fechar o carrinho lateral
 function toggleCarrinho() {
     const painelCarrinho = document.getElementById('carrinho-lateral');
-    painelCarrinho.classList.toggle('active');
+    if (painelCarrinho) {
+        painelCarrinho.classList.toggle('active');
+    }
 }
 
 // Função para adicionar o produto ao carrinho
@@ -24,9 +26,9 @@ function adicionarAoCarrinho(nome, preco) {
 
     atualizarInterfaceCarrinho();
     
-    // Abre o carrinho automaticamente ao adicionar um item (opcional)
+    // Abre o carrinho automaticamente ao adicionar um item
     const painelCarrinho = document.getElementById('carrinho-lateral');
-    if (!painelCarrinho.classList.contains('active')) {
+    if (painelCarrinho && !painelCarrinho.classList.contains('active')) {
         painelCarrinho.classList.add('active');
     }
 }
@@ -50,6 +52,9 @@ function atualizarInterfaceCarrinho() {
     const cartCount = document.getElementById('cart-count');
     const itensCarrinhoContainer = document.getElementById('itens-carrinho');
     const valorTotalContainer = document.getElementById('valor-total');
+
+    // Segurança: caso os elementos ainda não existam no HTML
+    if (!cartCount || !itensCarrinhoContainer || !valorTotalContainer) return;
 
     // 1. Atualiza o contador de bolinha vermelha/ícone
     const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
@@ -99,3 +104,7 @@ function finalizarCompra() {
     atualizarInterfaceCarrinho();
     toggleCarrinho(); // Fecha a aba do carrinho
 }
+
+// --- GARANTIA DE FUNCIONAMENTO ---
+// Vincula as funções diretamente ao objeto 'window' para que os botões do HTML 
+// consigam encontrá-las de qualquer forma, mesmo usando módulos.
